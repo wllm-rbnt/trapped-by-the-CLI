@@ -9,14 +9,16 @@ The demo files I used during the presentation are stored in the [demos](/demos) 
 ## Certificate requests
 
 The example CSR works with OpenSSL versions >=3.2.4 and <=3.4.1. Injection
-point is the C field of the DN. CN and SAN seem to match (www.)bla.lu where
+point is the C field of the DN. CN and SAN seem to match bla.lu & www.bla.lu where
 it actually matches \*.google.com .
+This bug has been introduced in https://github.com/openssl/openssl/pull/16583
+and fixed by https://github.com/openssl/openssl/pull/26932 .
 
 ```console
 nullcon% cd demos
 nullcon% openssl version
 OpenSSL 3.4.1 11 Feb 2025 (Library: OpenSSL 3.4.1 11 Feb 2025)
-nullcon% openssl req -in csr.der -text -noout
+nullcon% openssl req -in csr.der -inform d -text -noout
 Certificate Request:
     Data:
         Version: 1 (0x0)
@@ -73,13 +75,24 @@ nullcon% openssl req -noout -subject -in csr.der -inform d -nameopt multiline | 
     commonName                = *.google.com
 ```
 
+## ANSI art in an X.509 certificate
+
+The ANSI art squirrel comes from https://github.com/erkin/ponysay .
+
+```console
+nullcon% cd demos
+nullcon% openssl x509 -in squirrel.der -inform d -text -noout
+```
+
+![Squirrel ANSI art](demos/squirrel.gif)
+
 ## Use OpenSSL as a very inefficient video player
 
 The Godzilla video works with any version of OpenSSL. Injection point is the
-first DNS record of the SAN field.
+first DNS record of the SAN field in an X.509 certificate.
 ```console
 nullcon% cd demos
-nullcon% openssl x509 -in godzilla_cert.der -text -noout
+nullcon% openssl x509 -in godzilla.der -inform d -text -noout
 ```
 
 ![Godzilla video](demos/godzilla.gif)
@@ -115,7 +128,7 @@ nullcon%
 For the record, here are the smallest and largest certificates I found in
 CIRCL's Passive SSL dataset.
 
-The smallest one:
+The smallest one from the dataset:
 ```console
 nullcon% cd demos
 nullcon% openssl x509 -in small.der -text -inform d -noout
@@ -147,7 +160,7 @@ Certificate:
         cd:f5:26:fd:d8:97:a6:a1:b9:1d
 ```
 
-And, the largest one:
+And, the largest one from the dataset:
 ```console
 nullcon% cd demos
 nullcon% openssl x509 -in large.der -text -inform d -noout

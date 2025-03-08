@@ -6,7 +6,11 @@ sources files necessary to rebuild them with Marp.
 
 The demo files I used during the presentation are stored in the [demos](/demos) folder.
 
-The CSR that should work with OpenSSL versions >=3.2.4 and <=3.4.1.
+## Certificate requests
+
+The example CSR works with OpenSSL versions >=3.2.4 and <=3.4.1. Injection
+point is the C field of the DN. CN and SAN seem to match (www.)bla.lu where
+it actually matches \*.google.com .
 
 ```console
 nullcon% cd demos
@@ -69,13 +73,18 @@ nullcon% openssl req -noout -subject -in csr.der -inform d -nameopt multiline | 
     commonName                = *.google.com
 ```
 
-The Godzilla video works with any version of OpenSSL.
+## Use OpenSSL as a very inefficient video player
+
+The Godzilla video works with any version of OpenSSL. Injection point is the
+first DNS record of the SAN field.
 ```console
 nullcon% cd demos
 nullcon% openssl x509 -in godzilla_cert.der -text -noout
 ```
 
 ![Godzilla video](demos/godzilla.gif)
+
+## Hide some text output with unterminated escape sequences
 
 Here is the trick I use to hide trailing text after injection point when
 printing structures. This works with GNOME Terminal, Terminator, Xterm, and
@@ -100,6 +109,8 @@ bli
 bli
 nullcon% 
 ```
+
+## X.509 certificates found into the wild
 
 For the record, here are the smallest and largest certificates I found in
 CIRCL's Passive SSL dataset.

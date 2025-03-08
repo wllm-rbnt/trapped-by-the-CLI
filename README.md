@@ -71,7 +71,7 @@ nullcon% openssl req -noout -subject -in csr.der -inform d -nameopt multiline | 
 
 The Godzilla video works with any version of OpenSSL.
 
-[Godzilla video](demos/godzilla.gif)
+![Godzilla video](demos/godzilla.gif)
 
 Here is the trick I use to hide trailing text after injection point when
 printing structures. This works with GNOME Terminal, Terminator, Xterm, and

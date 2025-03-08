@@ -77,7 +77,8 @@ nullcon% openssl req -noout -subject -in csr.der -inform d -nameopt multiline | 
 
 ## ANSI art in an X.509 certificate
 
-The ANSI art squirrel comes from https://github.com/erkin/ponysay .
+The ANSI art squirrel comes from https://github.com/erkin/ponysay . Injection
+point is the CN field of the certificate.
 
 ```console
 nullcon% cd demos

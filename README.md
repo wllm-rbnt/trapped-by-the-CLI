@@ -70,6 +70,10 @@ nullcon% openssl req -noout -subject -in csr.der -inform d -nameopt multiline | 
 ```
 
 The Godzilla video works with any version of OpenSSL.
+```console
+nullcon% cd demos
+nullcon% openssl x509 -in godzilla_cert.der -text -noout
+```
 
 ![Godzilla video](demos/godzilla.gif)
 

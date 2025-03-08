@@ -1,4 +1,4 @@
-# Trapped by te CLI - Nullcon Goa 2025
+# Trapped by the CLI - Nullcon Goa 2025
 
 This repository holds the content of the talk I presented at Nullcon Goa 2025.
 In the [pres](/pres) folder, you'll find the presentation slides along with the
